@@ -6,9 +6,11 @@ set(CMAKE_CXX_STANDARD 17)
 include(cmake/CPM.cmake)
 
 CPMAddPackage("gh:fmtlib/fmt#10.0.0")
-
 CPMAddPackage("gh:abdes/cryptopp-cmake#v8.8.0")
 
-add_executable(lab02 main_omp.cpp)
+find_package(MPI REQUIRED)
 
-target_link_libraries(lab02 fmt::fmt cryptopp::cryptopp)
+message(STATUS "******Run: ${MPIEXEC}")
+
+add_executable(lab02 main.cpp)
+target_link_libraries(lab02 fmt::fmt cryptopp MPI::MPI_CXX)
